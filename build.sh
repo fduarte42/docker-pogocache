@@ -11,9 +11,9 @@ function tag_args() {
   local TAG="$1"
 
   if [ "$GITHUB_ACTIONS" = "true" ]; then
-    echo "-t ghcr.io/fduarte42/pogocache:$TAG -t docker.io/fduarte42/docker-pogocache:$TAG"
+    echo "-t ghcr.io/fduarte42/docker-pogocache:$TAG -t docker.io/fduarte42/docker-pogocache:$TAG"
   else
-    echo "-t fduarte42/docker-php:$TAG"
+    echo "-t fduarte42/docker-pogocache:$TAG"
   fi
 }
 
