@@ -3,6 +3,9 @@
 REPO="tidwall/pogocache"
 GITHUB_API="https://api.github.com/repos/${REPO}/tags"
 LATEST_TAG="$(curl -s "${GITHUB_API}" | jq -r '.[0].name')"
+MAJOR=$(echo "$LATEST_TAG" | cut -d. -f1)
+MINOR=$(echo "$LATEST_TAG" | cut -d. -f2)
+MAJOR_MINOR="$MAJOR.$MINOR"
 
 function tag_args() {
   local TAG="$1"
@@ -27,4 +30,6 @@ docker buildx build \
     --build-arg TAG="${LATEST_TAG}" \
     $(tag_args latest) \
     $(tag_args $LATEST_TAG) \
+    $(tag_args $MAJOR_MINOR) \
+    $(tag_args $MAJOR) \
     .
